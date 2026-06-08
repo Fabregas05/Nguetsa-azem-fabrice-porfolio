@@ -742,6 +742,32 @@
         </section>
     </div>
 
+    <!-- Modal de confirmation d'envoi d'email -->
+    <div class="modal-container" data-email-modal-container>
+        <div class="overlay" data-email-overlay></div>
+
+        <section class="confirmation-modal">
+            <button class="modal-close-btn" data-email-modal-close-btn><ion-icon name="close-outline"></ion-icon></button>
+
+            <div class="modal-img-wrapper">
+                <figure class="modal-avatar-box">
+                    <!-- SVG check animé -->
+                    <svg class="confirm-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+                        <circle class="confirm-ring" cx="32" cy="32" r="28" fill="none" stroke-width="3"/>
+                        <path class="confirm-check" d="M18 34 L28 44 L46 20" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </figure>
+            </div>
+
+            <div class="modal-content">
+                <h4 class="h3 modal-title">Message envoyé</h4>
+                <div class="modal-text">
+                    <p>Merci — votre message a bien été envoyé. Je vous répondrai dès que possible.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <script src="main.js"></script>
 
     <!-- EmailJS SDK (utilisé pour envoyer le formulaire de contact) -->

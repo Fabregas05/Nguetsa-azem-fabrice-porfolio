@@ -117,9 +117,9 @@ for(let i = 0; i < formInputs.length; i++) {
 // ==========================
 
 // Configuration EmailJS : remplacez ces valeurs par vos identifiants EmailJS
-const EMAILJS_USER = 'YOUR_EMAILJS_USER_ID';
-const EMAILJS_SERVICE = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE = 'YOUR_TEMPLATE_ID';
+const EMAILJS_USER = '3RIBh0hsl0UgC05oP';
+const EMAILJS_SERVICE = 'service_u0n5fa5';
+const EMAILJS_TEMPLATE = 'template_dbwb7d6';
 
 // initialisation EmailJS si l'utilisateur a renseigné la clé
 if (typeof emailjs !== 'undefined' && EMAILJS_USER !== 'YOUR_EMAILJS_USER_ID') {
@@ -129,6 +129,20 @@ if (typeof emailjs !== 'undefined' && EMAILJS_USER !== 'YOUR_EMAILJS_USER_ID') {
 const toast = document.getElementById('email-toast');
 const toastMsg = document.getElementById('email-toast-msg');
 const toastClose = document.getElementById('email-toast-close');
+
+// Modal de confirmation (éléments)
+const emailModalContainer = document.querySelector('[data-email-modal-container]');
+const emailModalCloseBtn = document.querySelector('[data-email-modal-close-btn]');
+const emailModalOverlay = document.querySelector('[data-email-overlay]');
+
+const emailModalFunc = function () {
+    if (!emailModalContainer || !emailModalOverlay) return;
+    emailModalContainer.classList.toggle('active');
+    emailModalOverlay.classList.toggle('active');
+}
+
+if (emailModalCloseBtn) emailModalCloseBtn.addEventListener('click', emailModalFunc);
+if (emailModalOverlay) emailModalOverlay.addEventListener('click', emailModalFunc);
 
 function showToast(message) {
     if (!toast || !toastMsg) return;
@@ -169,6 +183,8 @@ if (form) {
             emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE, templateParams)
                 .then(function() {
                     showToast('Message envoyé avec succès.');
+                    // afficher la modale de confirmation
+                    if (typeof emailModalFunc === 'function') emailModalFunc();
                     form.reset();
                     formBtn.setAttribute('disabled', '');
                 }, function(error) {
@@ -183,6 +199,7 @@ if (form) {
         const mailto = `mailto:fabricefabregas05@gmail.com?subject=${encodeURIComponent('Contact depuis site : ' + fullname)}&body=${encodeURIComponent(message + '\n\n--\n' + fullname + ' <' + email + '>')}`;
         window.location.href = mailto;
         showToast('Client mail ouvert — veuillez envoyer le message depuis votre application de messagerie.');
+        if (typeof emailModalFunc === 'function') emailModalFunc();
         form.reset();
         formBtn.setAttribute('disabled', '');
     });
